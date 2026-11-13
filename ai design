@@ -1,0 +1,16 @@
+AI Problem Design: Automated Customer Support Ticket Classifier
+
+• 1. Problem Statement & Narrow Use Case:
+Small e-commerce businesses receive hundreds of customer emails daily, causing slow response times. This project defines a text classification AI system that automatically categorizes incoming support tickets into four buckets: Billing, Shipping & Delivery, Product Returns, and General Inquiry.
+• 2. Target User:
+Customer support agents and team leads at a mid-sized e-commerce company who need to prioritize urgent refund or shipping issues without manually reading every message.
+• 3. Data Source:
+A small, labeled dataset of 1,000 historical customer support emails exported from the company's helpdesk CSV logs (or a public benchmark dataset such as the Kaggle Customer Support Ticket Dataset). Personally identifiable information (PII) like names and order numbers will be masked before processing.
+• 4. System Constraints:
+	• Latency: Must classify each incoming ticket in under 500 milliseconds to support real-time routing.
+	• Privacy: Customer emails must not be stored externally or used to train third-party public models.
+	• Cost: Must run on lightweight, low-cost inference (e.g., a fine-tuned DistilBERT model or zero-shot API with strict token limits).
+• 5. Evaluation Approach:
+	• Dataset Split: 80% training (800 tickets) and 20% testing (200 tickets).
+	• Primary Metrics: Macro F1-Score (targeting \(\ge \) 0.85) to ensure balanced accuracy across both frequent and rare ticket categories, plus Precision on Billing and Returns to prevent misrouting urgent financial complaints.
+	• Human Review: Any prediction with a confidence score below 70% is flagged for manual triage.
